@@ -1,0 +1,72 @@
+{
+	"compiler": {
+		"version": "0.8.23+commit.f704f362"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "texto",
+						"type": "string"
+					}
+				],
+				"name": "guardar",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "recuperar",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/ArmazenamentoInterface.sol": "ArmazenamentoInterface"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/ArmazenamentoInterface.sol": {
+			"keccak256": "0xf442285d011f5709123c5a7a061c0041560458d04df61b4a9a1df42aea8b7de2",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://df0c19a700d9a1998439f62d85e32d5f9eadb4498b6eab5c676ea1ebebab1e54",
+				"dweb:/ipfs/QmZbjd4xyEHSh5wqXukHF6VZgUmzMC3SKDkzKajZmvJBXZ"
+			]
+		}
+	},
+	"version": 1
+}

@@ -1,0 +1,1304 @@
+{
+	"id": "393850607571a89486fc40854bc1280f",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.23",
+	"solcLongVersion": "0.8.23+commit.f704f362",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"contracts/CasaDeCambioAbstract.sol": {
+				"content": "// SPDX-License-Identifier: MIT\n\npragma solidity >=0.7.0 <0.9.0;\n\nimport \"./ControleAcessoDono.sol\";\n\n/**\n    Crie um contrato que herde desse, receba o endereço de um ERC20 via construtor e venda por ether\n    Uma oferta já comprada não pode ser vendida novamente\n**/\nabstract contract CasaDeCambioAbstract is ControleAcessoDono {\n    //Event a ser emitido\n    event ofertaRealizada(\n        uint256 ultimaOfertaAdicionada,\n        uint256 quantidade,\n        uint256 preco\n    );\n\n    /**\n        1.Apenas o dono pode chamar\n        2.Validar a quantidadeTokens e precoLote\n        3.Transferir tokens do dono para o contrato\n        4.Salvar a oferta\n        5.Emitir o evento ofertaRealizada\n\n        *Importante precoLote é em Wei, para conversão: https://eth-converter.com/\n    **/\n    function realizaOferta(uint256 quantidadeTokens, uint256 precoLote)\n        external\n        virtual;\n\n    /**\n        1.Checar se o id é valido\n        2.Checar se a oferta está ativa\n        3.Checar se o valor repassado bate com o precoLote\n        4.Recuperar a oferta\n        5.Transferir a quantidade de tokens para a carteira de quem chama\n    **/\n    function compra(uint256 id) external payable virtual;\n\n    /**\n        Retornar a quantidade de ofertas ativas e o id da primeira oferta disponível\n    **/\n    function consultaOfertas() external view virtual returns (uint256, uint256);\n\n    // Desafio opcional: Retornar uma lista das ofertas ativas\n\n    //Lambuja\n    function sacarFundos() public apenasDono {\n        address payable recebedor = payable(msg.sender);\n        recebedor.transfer(address(this).balance);\n    }\n\n    /* Dicas para armazenar ofertas:\n        Mapping:\n            mapping(xtype => ytype) public zMap;\n            zMap[i] = valor;\n            valor = zMap[i];\n            //Importante: Mapping nunca remove um elemento, controle de inativar via código\n        Array Dinamico:\n            int[] teste;\n            teste.push(int); //Inclui no fim da lista\n            teste.length; // tamanho do array\n            teste.pop(); // Remove o ultimo elemento\n            teste[i];\n    */\n}\n"
+			},
+			"contracts/ControleAcessoDono.sol": {
+				"content": "// SPDX-License-Identifier: GPL-3.0\n\npragma solidity >=0.8.2 <0.9.0;\n\nabstract contract ControleAcessoDono {\n    address dono;\n\n    constructor() {\n        dono = msg.sender;\n    }\n\n    modifier apenasDono() {\n        require(msg.sender == dono, \"Apenas o dono pode chamar esta funcao\");\n        _;\n    }\n}\n"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": []
+		}
+	},
+	"output": {
+		"contracts": {
+			"contracts/CasaDeCambioAbstract.sol": {
+				"CasaDeCambioAbstract": {
+					"abi": [
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "ultimaOfertaAdicionada",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "quantidade",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "preco",
+									"type": "uint256"
+								}
+							],
+							"name": "ofertaRealizada",
+							"type": "event"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "id",
+									"type": "uint256"
+								}
+							],
+							"name": "compra",
+							"outputs": [],
+							"stateMutability": "payable",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "consultaOfertas",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "quantidadeTokens",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "precoLote",
+									"type": "uint256"
+								}
+							],
+							"name": "realizaOferta",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "sacarFundos",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						}
+					],
+					"devdoc": {
+						"kind": "dev",
+						"methods": {},
+						"version": 1
+					},
+					"evm": {
+						"assembly": "",
+						"bytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"deployedBytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"immutableReferences": {},
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"gasEstimates": null,
+						"legacyAssembly": null,
+						"methodIdentifiers": {
+							"compra(uint256)": "7cb02950",
+							"consultaOfertas()": "506e1d52",
+							"realizaOferta(uint256,uint256)": "2c562a44",
+							"sacarFundos()": "5f6df038"
+						}
+					},
+					"metadata": "{\"compiler\":{\"version\":\"0.8.23+commit.f704f362\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"ultimaOfertaAdicionada\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"quantidade\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"preco\",\"type\":\"uint256\"}],\"name\":\"ofertaRealizada\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"compra\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"consultaOfertas\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"quantidadeTokens\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"precoLote\",\"type\":\"uint256\"}],\"name\":\"realizaOferta\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"sacarFundos\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"compra(uint256)\":{\"notice\":\"1.Checar se o id \\u00e9 valido 2.Checar se a oferta est\\u00e1 ativa 3.Checar se o valor repassado bate com o precoLote 4.Recuperar a oferta 5.Transferir a quantidade de tokens para a carteira de quem chama*\"},\"consultaOfertas()\":{\"notice\":\"Retornar a quantidade de ofertas ativas e o id da primeira oferta dispon\\u00edvel*\"},\"realizaOferta(uint256,uint256)\":{\"notice\":\"1.Apenas o dono pode chamar 2.Validar a quantidadeTokens e precoLote 3.Transferir tokens do dono para o contrato 4.Salvar a oferta 5.Emitir o evento ofertaRealizada Importante precoLote \\u00e9 em Wei, para convers\\u00e3o: https://eth-converter.com/*\"}},\"notice\":\"Crie um contrato que herde desse, receba o endere\\u00e7o de um ERC20 via construtor e venda por ether Uma oferta j\\u00e1 comprada n\\u00e3o pode ser vendida novamente*\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/CasaDeCambioAbstract.sol\":\"CasaDeCambioAbstract\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/CasaDeCambioAbstract.sol\":{\"keccak256\":\"0x8c61e9ab27c88c4db10ace813c6b485ccc94c83c4507069bad179ed31cd65a1e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d61ede2cc292f46ca98dc33ae064ccfb5826a49f6d8e8c4f59933d4a22f49c41\",\"dweb:/ipfs/QmTdGbcz9bGkZ1ttKhW9EESrk4iJmiJokM2YXiM82H2xWB\"]},\"contracts/ControleAcessoDono.sol\":{\"keccak256\":\"0xc8fd535f65d5393bfa9f044a5118bce873b7df8cd853b1e8d26465ace62432d3\",\"license\":\"GPL-3.0\",\"urls\":[\"bzz-raw://8a05712da564f26221a44aea7ee98eea49147013ef9f4360b7b641f6ef720c23\",\"dweb:/ipfs/QmTgvD4sM56Ea7v9AC2P1pwjcbWUQPQD1FL978tuE39XW9\"]}},\"version\":1}",
+					"storageLayout": {
+						"storage": [
+							{
+								"astId": 64,
+								"contract": "contracts/CasaDeCambioAbstract.sol:CasaDeCambioAbstract",
+								"label": "dono",
+								"offset": 0,
+								"slot": "0",
+								"type": "t_address"
+							}
+						],
+						"types": {
+							"t_address": {
+								"encoding": "inplace",
+								"label": "address",
+								"numberOfBytes": "20"
+							}
+						}
+					},
+					"userdoc": {
+						"kind": "user",
+						"methods": {
+							"compra(uint256)": {
+								"notice": "1.Checar se o id é valido 2.Checar se a oferta está ativa 3.Checar se o valor repassado bate com o precoLote 4.Recuperar a oferta 5.Transferir a quantidade de tokens para a carteira de quem chama*"
+							},
+							"consultaOfertas()": {
+								"notice": "Retornar a quantidade de ofertas ativas e o id da primeira oferta disponível*"
+							},
+							"realizaOferta(uint256,uint256)": {
+								"notice": "1.Apenas o dono pode chamar 2.Validar a quantidadeTokens e precoLote 3.Transferir tokens do dono para o contrato 4.Salvar a oferta 5.Emitir o evento ofertaRealizada Importante precoLote é em Wei, para conversão: https://eth-converter.com/*"
+							}
+						},
+						"notice": "Crie um contrato que herde desse, receba o endereço de um ERC20 via construtor e venda por ether Uma oferta já comprada não pode ser vendida novamente*",
+						"version": 1
+					}
+				}
+			},
+			"contracts/ControleAcessoDono.sol": {
+				"ControleAcessoDono": {
+					"abi": [],
+					"devdoc": {
+						"kind": "dev",
+						"methods": {},
+						"version": 1
+					},
+					"evm": {
+						"assembly": "",
+						"bytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"deployedBytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"immutableReferences": {},
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"gasEstimates": null,
+						"legacyAssembly": null,
+						"methodIdentifiers": {}
+					},
+					"metadata": "{\"compiler\":{\"version\":\"0.8.23+commit.f704f362\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/ControleAcessoDono.sol\":\"ControleAcessoDono\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/ControleAcessoDono.sol\":{\"keccak256\":\"0xc8fd535f65d5393bfa9f044a5118bce873b7df8cd853b1e8d26465ace62432d3\",\"license\":\"GPL-3.0\",\"urls\":[\"bzz-raw://8a05712da564f26221a44aea7ee98eea49147013ef9f4360b7b641f6ef720c23\",\"dweb:/ipfs/QmTgvD4sM56Ea7v9AC2P1pwjcbWUQPQD1FL978tuE39XW9\"]}},\"version\":1}",
+					"storageLayout": {
+						"storage": [
+							{
+								"astId": 64,
+								"contract": "contracts/ControleAcessoDono.sol:ControleAcessoDono",
+								"label": "dono",
+								"offset": 0,
+								"slot": "0",
+								"type": "t_address"
+							}
+						],
+						"types": {
+							"t_address": {
+								"encoding": "inplace",
+								"label": "address",
+								"numberOfBytes": "20"
+							}
+						}
+					},
+					"userdoc": {
+						"kind": "user",
+						"methods": {},
+						"version": 1
+					}
+				}
+			}
+		},
+		"sources": {
+			"contracts/CasaDeCambioAbstract.sol": {
+				"ast": {
+					"absolutePath": "contracts/CasaDeCambioAbstract.sol",
+					"exportedSymbols": {
+						"CasaDeCambioAbstract": [
+							60
+						],
+						"ControleAcessoDono": [
+							86
+						]
+					},
+					"id": 61,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								">=",
+								"0.7",
+								".0",
+								"<",
+								"0.9",
+								".0"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:31:0"
+						},
+						{
+							"absolutePath": "contracts/ControleAcessoDono.sol",
+							"file": "./ControleAcessoDono.sol",
+							"id": 2,
+							"nameLocation": "-1:-1:-1",
+							"nodeType": "ImportDirective",
+							"scope": 61,
+							"sourceUnit": 87,
+							"src": "66:34:0",
+							"symbolAliases": [],
+							"unitAlias": ""
+						},
+						{
+							"abstract": true,
+							"baseContracts": [
+								{
+									"baseName": {
+										"id": 4,
+										"name": "ControleAcessoDono",
+										"nameLocations": [
+											"314:18:0"
+										],
+										"nodeType": "IdentifierPath",
+										"referencedDeclaration": 86,
+										"src": "314:18:0"
+									},
+									"id": 5,
+									"nodeType": "InheritanceSpecifier",
+									"src": "314:18:0"
+								}
+							],
+							"canonicalName": "CasaDeCambioAbstract",
+							"contractDependencies": [],
+							"contractKind": "contract",
+							"documentation": {
+								"id": 3,
+								"nodeType": "StructuredDocumentation",
+								"src": "102:169:0",
+								"text": "Crie um contrato que herde desse, receba o endereço de um ERC20 via construtor e venda por ether\nUma oferta já comprada não pode ser vendida novamente*"
+							},
+							"fullyImplemented": false,
+							"id": 60,
+							"linearizedBaseContracts": [
+								60,
+								86
+							],
+							"name": "CasaDeCambioAbstract",
+							"nameLocation": "290:20:0",
+							"nodeType": "ContractDefinition",
+							"nodes": [
+								{
+									"anonymous": false,
+									"eventSelector": "65fed65ff7cd6b2d79d64e55d0439fba77cb42a9adabf9fa002ea4c20a1f81e1",
+									"id": 13,
+									"name": "ofertaRealizada",
+									"nameLocation": "371:15:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 12,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 7,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "ultimaOfertaAdicionada",
+												"nameLocation": "404:22:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 13,
+												"src": "396:30:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 6,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "396:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 9,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "quantidade",
+												"nameLocation": "444:10:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 13,
+												"src": "436:18:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 8,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "436:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 11,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "preco",
+												"nameLocation": "472:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 13,
+												"src": "464:13:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 10,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "464:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "386:97:0"
+									},
+									"src": "365:119:0"
+								},
+								{
+									"documentation": {
+										"id": 14,
+										"nodeType": "StructuredDocumentation",
+										"src": "490:302:0",
+										"text": "1.Apenas o dono pode chamar\n2.Validar a quantidadeTokens e precoLote\n3.Transferir tokens do dono para o contrato\n4.Salvar a oferta\n5.Emitir o evento ofertaRealizada\nImportante precoLote é em Wei, para conversão: https://eth-converter.com/*"
+									},
+									"functionSelector": "2c562a44",
+									"id": 21,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "realizaOferta",
+									"nameLocation": "806:13:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 19,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 16,
+												"mutability": "mutable",
+												"name": "quantidadeTokens",
+												"nameLocation": "828:16:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 21,
+												"src": "820:24:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 15,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "820:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 18,
+												"mutability": "mutable",
+												"name": "precoLote",
+												"nameLocation": "854:9:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 21,
+												"src": "846:17:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 17,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "846:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "819:45:0"
+									},
+									"returnParameters": {
+										"id": 20,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "897:0:0"
+									},
+									"scope": 60,
+									"src": "797:101:0",
+									"stateMutability": "nonpayable",
+									"virtual": true,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 22,
+										"nodeType": "StructuredDocumentation",
+										"src": "904:249:0",
+										"text": "1.Checar se o id é valido\n2.Checar se a oferta está ativa\n3.Checar se o valor repassado bate com o precoLote\n4.Recuperar a oferta\n5.Transferir a quantidade de tokens para a carteira de quem chama*"
+									},
+									"functionSelector": "7cb02950",
+									"id": 27,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "compra",
+									"nameLocation": "1167:6:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 25,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 24,
+												"mutability": "mutable",
+												"name": "id",
+												"nameLocation": "1182:2:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 27,
+												"src": "1174:10:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 23,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1174:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "1173:12:0"
+									},
+									"returnParameters": {
+										"id": 26,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "1210:0:0"
+									},
+									"scope": 60,
+									"src": "1158:53:0",
+									"stateMutability": "payable",
+									"virtual": true,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 28,
+										"nodeType": "StructuredDocumentation",
+										"src": "1217:97:0",
+										"text": "Retornar a quantidade de ofertas ativas e o id da primeira oferta disponível*"
+									},
+									"functionSelector": "506e1d52",
+									"id": 35,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "consultaOfertas",
+									"nameLocation": "1328:15:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 29,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "1343:2:0"
+									},
+									"returnParameters": {
+										"id": 34,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 31,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 35,
+												"src": "1377:7:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 30,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1377:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 33,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 35,
+												"src": "1386:7:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 32,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1386:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "1376:18:0"
+									},
+									"scope": 60,
+									"src": "1319:76:0",
+									"stateMutability": "view",
+									"virtual": true,
+									"visibility": "external"
+								},
+								{
+									"body": {
+										"id": 58,
+										"nodeType": "Block",
+										"src": "1520:115:0",
+										"statements": [
+											{
+												"assignments": [
+													41
+												],
+												"declarations": [
+													{
+														"constant": false,
+														"id": 41,
+														"mutability": "mutable",
+														"name": "recebedor",
+														"nameLocation": "1546:9:0",
+														"nodeType": "VariableDeclaration",
+														"scope": 58,
+														"src": "1530:25:0",
+														"stateVariable": false,
+														"storageLocation": "default",
+														"typeDescriptions": {
+															"typeIdentifier": "t_address_payable",
+															"typeString": "address payable"
+														},
+														"typeName": {
+															"id": 40,
+															"name": "address",
+															"nodeType": "ElementaryTypeName",
+															"src": "1530:15:0",
+															"stateMutability": "payable",
+															"typeDescriptions": {
+																"typeIdentifier": "t_address_payable",
+																"typeString": "address payable"
+															}
+														},
+														"visibility": "internal"
+													}
+												],
+												"id": 47,
+												"initialValue": {
+													"arguments": [
+														{
+															"expression": {
+																"id": 44,
+																"name": "msg",
+																"nodeType": "Identifier",
+																"overloadedDeclarations": [],
+																"referencedDeclaration": 4294967281,
+																"src": "1566:3:0",
+																"typeDescriptions": {
+																	"typeIdentifier": "t_magic_message",
+																	"typeString": "msg"
+																}
+															},
+															"id": 45,
+															"isConstant": false,
+															"isLValue": false,
+															"isPure": false,
+															"lValueRequested": false,
+															"memberLocation": "1570:6:0",
+															"memberName": "sender",
+															"nodeType": "MemberAccess",
+															"src": "1566:10:0",
+															"typeDescriptions": {
+																"typeIdentifier": "t_address",
+																"typeString": "address"
+															}
+														}
+													],
+													"expression": {
+														"argumentTypes": [
+															{
+																"typeIdentifier": "t_address",
+																"typeString": "address"
+															}
+														],
+														"id": 43,
+														"isConstant": false,
+														"isLValue": false,
+														"isPure": true,
+														"lValueRequested": false,
+														"nodeType": "ElementaryTypeNameExpression",
+														"src": "1558:8:0",
+														"typeDescriptions": {
+															"typeIdentifier": "t_type$_t_address_payable_$",
+															"typeString": "type(address payable)"
+														},
+														"typeName": {
+															"id": 42,
+															"name": "address",
+															"nodeType": "ElementaryTypeName",
+															"src": "1558:8:0",
+															"stateMutability": "payable",
+															"typeDescriptions": {}
+														}
+													},
+													"id": 46,
+													"isConstant": false,
+													"isLValue": false,
+													"isPure": false,
+													"kind": "typeConversion",
+													"lValueRequested": false,
+													"nameLocations": [],
+													"names": [],
+													"nodeType": "FunctionCall",
+													"src": "1558:19:0",
+													"tryCall": false,
+													"typeDescriptions": {
+														"typeIdentifier": "t_address_payable",
+														"typeString": "address payable"
+													}
+												},
+												"nodeType": "VariableDeclarationStatement",
+												"src": "1530:47:0"
+											},
+											{
+												"expression": {
+													"arguments": [
+														{
+															"expression": {
+																"arguments": [
+																	{
+																		"id": 53,
+																		"name": "this",
+																		"nodeType": "Identifier",
+																		"overloadedDeclarations": [],
+																		"referencedDeclaration": 4294967268,
+																		"src": "1614:4:0",
+																		"typeDescriptions": {
+																			"typeIdentifier": "t_contract$_CasaDeCambioAbstract_$60",
+																			"typeString": "contract CasaDeCambioAbstract"
+																		}
+																	}
+																],
+																"expression": {
+																	"argumentTypes": [
+																		{
+																			"typeIdentifier": "t_contract$_CasaDeCambioAbstract_$60",
+																			"typeString": "contract CasaDeCambioAbstract"
+																		}
+																	],
+																	"id": 52,
+																	"isConstant": false,
+																	"isLValue": false,
+																	"isPure": true,
+																	"lValueRequested": false,
+																	"nodeType": "ElementaryTypeNameExpression",
+																	"src": "1606:7:0",
+																	"typeDescriptions": {
+																		"typeIdentifier": "t_type$_t_address_$",
+																		"typeString": "type(address)"
+																	},
+																	"typeName": {
+																		"id": 51,
+																		"name": "address",
+																		"nodeType": "ElementaryTypeName",
+																		"src": "1606:7:0",
+																		"typeDescriptions": {}
+																	}
+																},
+																"id": 54,
+																"isConstant": false,
+																"isLValue": false,
+																"isPure": false,
+																"kind": "typeConversion",
+																"lValueRequested": false,
+																"nameLocations": [],
+																"names": [],
+																"nodeType": "FunctionCall",
+																"src": "1606:13:0",
+																"tryCall": false,
+																"typeDescriptions": {
+																	"typeIdentifier": "t_address",
+																	"typeString": "address"
+																}
+															},
+															"id": 55,
+															"isConstant": false,
+															"isLValue": false,
+															"isPure": false,
+															"lValueRequested": false,
+															"memberLocation": "1620:7:0",
+															"memberName": "balance",
+															"nodeType": "MemberAccess",
+															"src": "1606:21:0",
+															"typeDescriptions": {
+																"typeIdentifier": "t_uint256",
+																"typeString": "uint256"
+															}
+														}
+													],
+													"expression": {
+														"argumentTypes": [
+															{
+																"typeIdentifier": "t_uint256",
+																"typeString": "uint256"
+															}
+														],
+														"expression": {
+															"id": 48,
+															"name": "recebedor",
+															"nodeType": "Identifier",
+															"overloadedDeclarations": [],
+															"referencedDeclaration": 41,
+															"src": "1587:9:0",
+															"typeDescriptions": {
+																"typeIdentifier": "t_address_payable",
+																"typeString": "address payable"
+															}
+														},
+														"id": 50,
+														"isConstant": false,
+														"isLValue": false,
+														"isPure": false,
+														"lValueRequested": false,
+														"memberLocation": "1597:8:0",
+														"memberName": "transfer",
+														"nodeType": "MemberAccess",
+														"src": "1587:18:0",
+														"typeDescriptions": {
+															"typeIdentifier": "t_function_transfer_nonpayable$_t_uint256_$returns$__$",
+															"typeString": "function (uint256)"
+														}
+													},
+													"id": 56,
+													"isConstant": false,
+													"isLValue": false,
+													"isPure": false,
+													"kind": "functionCall",
+													"lValueRequested": false,
+													"nameLocations": [],
+													"names": [],
+													"nodeType": "FunctionCall",
+													"src": "1587:41:0",
+													"tryCall": false,
+													"typeDescriptions": {
+														"typeIdentifier": "t_tuple$__$",
+														"typeString": "tuple()"
+													}
+												},
+												"id": 57,
+												"nodeType": "ExpressionStatement",
+												"src": "1587:41:0"
+											}
+										]
+									},
+									"functionSelector": "5f6df038",
+									"id": 59,
+									"implemented": true,
+									"kind": "function",
+									"modifiers": [
+										{
+											"id": 38,
+											"kind": "modifierInvocation",
+											"modifierName": {
+												"id": 37,
+												"name": "apenasDono",
+												"nameLocations": [
+													"1509:10:0"
+												],
+												"nodeType": "IdentifierPath",
+												"referencedDeclaration": 85,
+												"src": "1509:10:0"
+											},
+											"nodeType": "ModifierInvocation",
+											"src": "1509:10:0"
+										}
+									],
+									"name": "sacarFundos",
+									"nameLocation": "1488:11:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 36,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "1499:2:0"
+									},
+									"returnParameters": {
+										"id": 39,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "1520:0:0"
+									},
+									"scope": 60,
+									"src": "1479:156:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "public"
+								}
+							],
+							"scope": 61,
+							"src": "272:1851:0",
+							"usedErrors": [],
+							"usedEvents": [
+								13
+							]
+						}
+					],
+					"src": "33:2091:0"
+				},
+				"id": 0
+			},
+			"contracts/ControleAcessoDono.sol": {
+				"ast": {
+					"absolutePath": "contracts/ControleAcessoDono.sol",
+					"exportedSymbols": {
+						"ControleAcessoDono": [
+							86
+						]
+					},
+					"id": 87,
+					"license": "GPL-3.0",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 62,
+							"literals": [
+								"solidity",
+								">=",
+								"0.8",
+								".2",
+								"<",
+								"0.9",
+								".0"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "37:31:1"
+						},
+						{
+							"abstract": true,
+							"baseContracts": [],
+							"canonicalName": "ControleAcessoDono",
+							"contractDependencies": [],
+							"contractKind": "contract",
+							"fullyImplemented": true,
+							"id": 86,
+							"linearizedBaseContracts": [
+								86
+							],
+							"name": "ControleAcessoDono",
+							"nameLocation": "88:18:1",
+							"nodeType": "ContractDefinition",
+							"nodes": [
+								{
+									"constant": false,
+									"id": 64,
+									"mutability": "mutable",
+									"name": "dono",
+									"nameLocation": "121:4:1",
+									"nodeType": "VariableDeclaration",
+									"scope": 86,
+									"src": "113:12:1",
+									"stateVariable": true,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_address",
+										"typeString": "address"
+									},
+									"typeName": {
+										"id": 63,
+										"name": "address",
+										"nodeType": "ElementaryTypeName",
+										"src": "113:7:1",
+										"stateMutability": "nonpayable",
+										"typeDescriptions": {
+											"typeIdentifier": "t_address",
+											"typeString": "address"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"body": {
+										"id": 72,
+										"nodeType": "Block",
+										"src": "146:34:1",
+										"statements": [
+											{
+												"expression": {
+													"id": 70,
+													"isConstant": false,
+													"isLValue": false,
+													"isPure": false,
+													"lValueRequested": false,
+													"leftHandSide": {
+														"id": 67,
+														"name": "dono",
+														"nodeType": "Identifier",
+														"overloadedDeclarations": [],
+														"referencedDeclaration": 64,
+														"src": "156:4:1",
+														"typeDescriptions": {
+															"typeIdentifier": "t_address",
+															"typeString": "address"
+														}
+													},
+													"nodeType": "Assignment",
+													"operator": "=",
+													"rightHandSide": {
+														"expression": {
+															"id": 68,
+															"name": "msg",
+															"nodeType": "Identifier",
+															"overloadedDeclarations": [],
+															"referencedDeclaration": 4294967281,
+															"src": "163:3:1",
+															"typeDescriptions": {
+																"typeIdentifier": "t_magic_message",
+																"typeString": "msg"
+															}
+														},
+														"id": 69,
+														"isConstant": false,
+														"isLValue": false,
+														"isPure": false,
+														"lValueRequested": false,
+														"memberLocation": "167:6:1",
+														"memberName": "sender",
+														"nodeType": "MemberAccess",
+														"src": "163:10:1",
+														"typeDescriptions": {
+															"typeIdentifier": "t_address",
+															"typeString": "address"
+														}
+													},
+													"src": "156:17:1",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"id": 71,
+												"nodeType": "ExpressionStatement",
+												"src": "156:17:1"
+											}
+										]
+									},
+									"id": 73,
+									"implemented": true,
+									"kind": "constructor",
+									"modifiers": [],
+									"name": "",
+									"nameLocation": "-1:-1:-1",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 65,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "143:2:1"
+									},
+									"returnParameters": {
+										"id": 66,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "146:0:1"
+									},
+									"scope": 86,
+									"src": "132:48:1",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "internal"
+								},
+								{
+									"body": {
+										"id": 84,
+										"nodeType": "Block",
+										"src": "208:96:1",
+										"statements": [
+											{
+												"expression": {
+													"arguments": [
+														{
+															"commonType": {
+																"typeIdentifier": "t_address",
+																"typeString": "address"
+															},
+															"id": 79,
+															"isConstant": false,
+															"isLValue": false,
+															"isPure": false,
+															"lValueRequested": false,
+															"leftExpression": {
+																"expression": {
+																	"id": 76,
+																	"name": "msg",
+																	"nodeType": "Identifier",
+																	"overloadedDeclarations": [],
+																	"referencedDeclaration": 4294967281,
+																	"src": "226:3:1",
+																	"typeDescriptions": {
+																		"typeIdentifier": "t_magic_message",
+																		"typeString": "msg"
+																	}
+																},
+																"id": 77,
+																"isConstant": false,
+																"isLValue": false,
+																"isPure": false,
+																"lValueRequested": false,
+																"memberLocation": "230:6:1",
+																"memberName": "sender",
+																"nodeType": "MemberAccess",
+																"src": "226:10:1",
+																"typeDescriptions": {
+																	"typeIdentifier": "t_address",
+																	"typeString": "address"
+																}
+															},
+															"nodeType": "BinaryOperation",
+															"operator": "==",
+															"rightExpression": {
+																"id": 78,
+																"name": "dono",
+																"nodeType": "Identifier",
+																"overloadedDeclarations": [],
+																"referencedDeclaration": 64,
+																"src": "240:4:1",
+																"typeDescriptions": {
+																	"typeIdentifier": "t_address",
+																	"typeString": "address"
+																}
+															},
+															"src": "226:18:1",
+															"typeDescriptions": {
+																"typeIdentifier": "t_bool",
+																"typeString": "bool"
+															}
+														},
+														{
+															"hexValue": "4170656e6173206f20646f6e6f20706f6465206368616d617220657374612066756e63616f",
+															"id": 80,
+															"isConstant": false,
+															"isLValue": false,
+															"isPure": true,
+															"kind": "string",
+															"lValueRequested": false,
+															"nodeType": "Literal",
+															"src": "246:39:1",
+															"typeDescriptions": {
+																"typeIdentifier": "t_stringliteral_e51cbeb0ce6a6d1ad2b0b117bf09a124b954fd215fe10c0d755ee0fdc6d7acc8",
+																"typeString": "literal_string \"Apenas o dono pode chamar esta funcao\""
+															},
+															"value": "Apenas o dono pode chamar esta funcao"
+														}
+													],
+													"expression": {
+														"argumentTypes": [
+															{
+																"typeIdentifier": "t_bool",
+																"typeString": "bool"
+															},
+															{
+																"typeIdentifier": "t_stringliteral_e51cbeb0ce6a6d1ad2b0b117bf09a124b954fd215fe10c0d755ee0fdc6d7acc8",
+																"typeString": "literal_string \"Apenas o dono pode chamar esta funcao\""
+															}
+														],
+														"id": 75,
+														"name": "require",
+														"nodeType": "Identifier",
+														"overloadedDeclarations": [
+															4294967278,
+															4294967278
+														],
+														"referencedDeclaration": 4294967278,
+														"src": "218:7:1",
+														"typeDescriptions": {
+															"typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+															"typeString": "function (bool,string memory) pure"
+														}
+													},
+													"id": 81,
+													"isConstant": false,
+													"isLValue": false,
+													"isPure": false,
+													"kind": "functionCall",
+													"lValueRequested": false,
+													"nameLocations": [],
+													"names": [],
+													"nodeType": "FunctionCall",
+													"src": "218:68:1",
+													"tryCall": false,
+													"typeDescriptions": {
+														"typeIdentifier": "t_tuple$__$",
+														"typeString": "tuple()"
+													}
+												},
+												"id": 82,
+												"nodeType": "ExpressionStatement",
+												"src": "218:68:1"
+											},
+											{
+												"id": 83,
+												"nodeType": "PlaceholderStatement",
+												"src": "296:1:1"
+											}
+										]
+									},
+									"id": 85,
+									"name": "apenasDono",
+									"nameLocation": "195:10:1",
+									"nodeType": "ModifierDefinition",
+									"parameters": {
+										"id": 74,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "205:2:1"
+									},
+									"src": "186:118:1",
+									"virtual": false,
+									"visibility": "internal"
+								}
+							],
+							"scope": 87,
+							"src": "70:236:1",
+							"usedErrors": [],
+							"usedEvents": []
+						}
+					],
+					"src": "37:270:1"
+				},
+				"id": 1
+			}
+		}
+	}
+}

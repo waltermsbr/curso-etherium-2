@@ -1,0 +1,146 @@
+{
+	"compiler": {
+		"version": "0.8.23+commit.f704f362"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "ultimaOfertaAdicionada",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "quantidade",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "preco",
+						"type": "uint256"
+					}
+				],
+				"name": "ofertaRealizada",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "compra",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "consultaOfertas",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "quantidadeTokens",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "precoLote",
+						"type": "uint256"
+					}
+				],
+				"name": "realizaOferta",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "sacarFundos",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"compra(uint256)": {
+					"notice": "1.Checar se o id é valido 2.Checar se a oferta está ativa 3.Checar se o valor repassado bate com o precoLote 4.Recuperar a oferta 5.Transferir a quantidade de tokens para a carteira de quem chama*"
+				},
+				"consultaOfertas()": {
+					"notice": "Retornar a quantidade de ofertas ativas e o id da primeira oferta disponível*"
+				},
+				"realizaOferta(uint256,uint256)": {
+					"notice": "1.Apenas o dono pode chamar 2.Validar a quantidadeTokens e precoLote 3.Transferir tokens do dono para o contrato 4.Salvar a oferta 5.Emitir o evento ofertaRealizada Importante precoLote é em Wei, para conversão: https://eth-converter.com/*"
+				}
+			},
+			"notice": "Crie um contrato que herde desse, receba o endereço de um ERC20 via construtor e venda por ether Uma oferta já comprada não pode ser vendida novamente*",
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/CasaDeCambioAbstract.sol": "CasaDeCambioAbstract"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/CasaDeCambioAbstract.sol": {
+			"keccak256": "0x8c61e9ab27c88c4db10ace813c6b485ccc94c83c4507069bad179ed31cd65a1e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d61ede2cc292f46ca98dc33ae064ccfb5826a49f6d8e8c4f59933d4a22f49c41",
+				"dweb:/ipfs/QmTdGbcz9bGkZ1ttKhW9EESrk4iJmiJokM2YXiM82H2xWB"
+			]
+		},
+		"contracts/ControleAcessoDono.sol": {
+			"keccak256": "0xc8fd535f65d5393bfa9f044a5118bce873b7df8cd853b1e8d26465ace62432d3",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://8a05712da564f26221a44aea7ee98eea49147013ef9f4360b7b641f6ef720c23",
+				"dweb:/ipfs/QmTgvD4sM56Ea7v9AC2P1pwjcbWUQPQD1FL978tuE39XW9"
+			]
+		}
+	},
+	"version": 1
+}

@@ -1,0 +1,73 @@
+{
+	"compiler": {
+		"version": "0.8.23+commit.f704f362"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "hello",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/HelloWorld.sol": "HelloWorld"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/ControleAcessoDono.sol": {
+			"keccak256": "0xc8fd535f65d5393bfa9f044a5118bce873b7df8cd853b1e8d26465ace62432d3",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://8a05712da564f26221a44aea7ee98eea49147013ef9f4360b7b641f6ef720c23",
+				"dweb:/ipfs/QmTgvD4sM56Ea7v9AC2P1pwjcbWUQPQD1FL978tuE39XW9"
+			]
+		},
+		"contracts/HelloWorld.sol": {
+			"keccak256": "0xc96cc66efaa0b9d703f1597e501e77b14d107c47d0be91fbce7cf2bc7065dbb0",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://8844cad637a10bf60528b8a852552ed4aa1ec70ee51586deebfd9c92ca0d3cab",
+				"dweb:/ipfs/QmUwKLWpeAT1e3qcLheK3MVtgGVHKfzfbtFbcVbbsdE6r5"
+			]
+		}
+	},
+	"version": 1
+}

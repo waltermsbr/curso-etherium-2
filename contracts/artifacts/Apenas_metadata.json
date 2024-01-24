@@ -1,0 +1,70 @@
+{
+	"compiler": {
+		"version": "0.8.18+commit.87f61d96"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "hello",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/ApenasDono.sol": "Apenas"
+		},
+		"evmVersion": "paris",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/ApenasDono.sol": {
+			"keccak256": "0x3fec83139190802c8dfc557fee1ada3891cb956111344ba5fba1eba896f0e115",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://8e631664911d01e91fefe326f7163c6e48d0d00a48e94b5e06b1b2fad101648f",
+				"dweb:/ipfs/Qmcms65y6XZreDWezb7yQ2znRBnhbhLor4e5XRm9cZ7rGX"
+			]
+		}
+	},
+	"version": 1
+}

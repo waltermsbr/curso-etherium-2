@@ -1,0 +1,132 @@
+{
+	"compiler": {
+		"version": "0.8.23+commit.f704f362"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "resultado",
+						"type": "uint256"
+					}
+				],
+				"name": "soma",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "valor",
+						"type": "uint256"
+					}
+				],
+				"name": "ehPar",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "num",
+						"type": "uint256"
+					}
+				],
+				"name": "fatorial",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getResultado",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "valor1",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "valor2",
+						"type": "uint256"
+					}
+				],
+				"name": "sum",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"sum(uint256,uint256)": {
+					"notice": "pure - trata apenas informações recebidas não acessando outras variaveis do contrato"
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/Soma.sol": "Soma"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/Soma.sol": {
+			"keccak256": "0x09e8708a0b0ae390f05802e895ee16df41e756b5ccd576da715afb965ffb0851",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://cffd1f1c82020d71baf44699582bb099878d454bcadf533e7d93efea0931c3ca",
+				"dweb:/ipfs/QmQD8MMgQk6dVkxTZWEaYboMKCXoKQUqAdUFu493k2rVdz"
+			]
+		}
+	},
+	"version": 1
+}

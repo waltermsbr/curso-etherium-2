@@ -1,0 +1,88 @@
+{
+	"compiler": {
+		"version": "0.8.23+commit.f704f362"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "texto",
+						"type": "string"
+					}
+				],
+				"name": "guardar",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "recuperar",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/Armazenamento.sol": "Armazenamento"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/Armazenamento.sol": {
+			"keccak256": "0xa07a22675fb13252c03de4d90afec8c4fb61e4359ed28a70f0ce3ea67d5f154d",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://8335631324503413ebbf8990ab537b9758aa73f0ab5914b60d9bde4468d1422a",
+				"dweb:/ipfs/QmSwRS4pA3vQ76eWv4QsyyLJrQSbn7qEBNeqk2wGatkHo4"
+			]
+		},
+		"contracts/ArmazenamentoInterface.sol": {
+			"keccak256": "0xf442285d011f5709123c5a7a061c0041560458d04df61b4a9a1df42aea8b7de2",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://df0c19a700d9a1998439f62d85e32d5f9eadb4498b6eab5c676ea1ebebab1e54",
+				"dweb:/ipfs/QmZbjd4xyEHSh5wqXukHF6VZgUmzMC3SKDkzKajZmvJBXZ"
+			]
+		},
+		"contracts/ControleAcessoDono.sol": {
+			"keccak256": "0xc8fd535f65d5393bfa9f044a5118bce873b7df8cd853b1e8d26465ace62432d3",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://8a05712da564f26221a44aea7ee98eea49147013ef9f4360b7b641f6ef720c23",
+				"dweb:/ipfs/QmTgvD4sM56Ea7v9AC2P1pwjcbWUQPQD1FL978tuE39XW9"
+			]
+		}
+	},
+	"version": 1
+}

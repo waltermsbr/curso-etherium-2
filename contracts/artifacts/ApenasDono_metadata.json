@@ -1,0 +1,51 @@
+{
+	"compiler": {
+		"version": "0.8.18+commit.87f61d96"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/ControleAcessoDono.sol": "ApenasDono"
+		},
+		"evmVersion": "paris",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/ControleAcessoDono.sol": {
+			"keccak256": "0x2ce32182246f41fcceadf7edf00d8a578c768f9d14871c51bd51ed432632f03d",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://1876ea363635d0e0c73e1e4d37ddb64d8662db325324e0d8820c339231deca0f",
+				"dweb:/ipfs/QmXFeFam7iqFPdDYhoST85MopEPcb7Z9Fw5EQfeQoaBR7X"
+			]
+		}
+	},
+	"version": 1
+}

@@ -1,0 +1,45 @@
+{
+	"compiler": {
+		"version": "0.8.18+commit.87f61d96"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/HelloWord.sol": "HelloWord"
+		},
+		"evmVersion": "paris",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/HelloWord.sol": {
+			"keccak256": "0x00a00130faabd923f1a1484ad0418531a3c3b1d93d0fee5a3545e0668dca5007",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://5a38d152ec21c32f525fd098cec2234c6f3e90a9385387e47545b55afcc8d286",
+				"dweb:/ipfs/QmTVQajDaTaqL3PYYGTyo1VuQMK1tNjyz3HAFh3zvAHVVA"
+			]
+		}
+	},
+	"version": 1
+}
